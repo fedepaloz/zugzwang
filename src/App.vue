@@ -25,6 +25,7 @@ export default {
       this.validMoves = []
       let valueOne = values[0]
       let valueTwo = values[1]
+      this.selectedCell = values[0] + ',' + values[1]
       this.availableMoves.forEach((el) => {
         const newPositionOne = (valueOne + el[0]).toString()
         const newPositionTwo = (valueTwo + el[1]).toString()
@@ -45,6 +46,9 @@ export default {
 
     isMoveValid(row, cell) {
       return this.validMoves.includes(row.toString() + cell.toString())
+    },
+    isActive(row, cell) {
+      return this.selectedCell === row + ',' + cell
     }
   }
 }
@@ -60,7 +64,7 @@ export default {
             :class="[
               calculateClass(row, cell),
               isMoveValid(row, cell) ? 'square-horse' : '',
-              { red: isClicked }
+              isActive(row, cell) ? 'red' : ''
             ]"
             class="square"
           >
